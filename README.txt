@@ -1,7 +1,8 @@
-Name: Anant Ahuja
-UTA ID: 1001569357
-Programming Language used: Python 3.7.3
-
 1. Download and install Python 3 from here (https://wiki.python.org/moin/BeginnersGuide/Download). >= Python 3.5 is required to run this code.
 2. Install NumPy from here (https://www.scipy.org/install.html)
 3. Run the code by navigating to the directory and type the following command in the terminal: "python3 train.py iris.data"
+
+Firstly, the data was split into 5 segments for 5 fold cross-validation. In 5 fold cross-validation, there will be 5 iterations and in each iteration 1 segment will be the testing set and the other 4 segments combined will be the training set. 5 fold cross-validation was chosen because that would mean our training and testing data is split 80/20 which is suitable for small datasets like this one.
+While partitioning the data, it was made sure that datapoints of all 3 different classes are present in the training set and the testing set in an equal distribution. If this wasn’t carried out, that may have resulted in a training set entirely comprised of datapoint all belonging to just 1 class and training a model based on that training set would have been entirely useless.
+In each iteration, the closed form formula of linear regression: B = (AT A)-1 AT Y is used to calculate the weight of each feature of all the datapoints in the training data. This Beta value is then used to predict the class of datapoints in the testing data and our accuracy on this testing set is noted. If the label returned by the model is a floating point value, it is rounded to the nearest integer.
+The average of all the Beta values is taken and this model is used to test the entire dataset.
